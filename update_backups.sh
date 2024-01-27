@@ -19,5 +19,8 @@ file=$(cat channels.txt)
 for channel in $file
 do
     echo "Updating Local Copy Of Channel: $channel"
-    yt-dlp -f 'bestvideo[ext=mp4]+bestvideo[height=480]' -ciw -o '%(uploader)s/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s' "$channel"
+    yt-dlp --merge-output-format mkv \
+    -f 22 \
+    --verbose --all-subs --embed-subs \
+    -ciw -o '%(uploader)s/%(playlist)s/%(title)s.%(ext)s' "$channel"
 done
