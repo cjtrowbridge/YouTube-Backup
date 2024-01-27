@@ -1,19 +1,9 @@
 #!/bin/bash
 
-# Get current and file times
-CurTime=$(date +%s)
-YTDLTime=$(stat /usr/local/bin/yt-dlp -c %Y)
-LastUpdate=$(expr $CurTime - $YTDLTime)
-
-# Check if we've already updated today
-if [ $LastUpdate -gt 96400 ]; then
-    sudo curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp
-    sudo chmod a+rx /usr/local/bin/yt-dlp
-    sudo yt-dlp -U
-else
-    echo "Already updated YT-DLP today."
-fi
-
+# Make sure software is up to date
+sudo curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp
+sudo chmod a+rx /usr/local/bin/yt-dlp
+sudo yt-dlp -U
 
 file=$(cat channels.txt)
 for channel in $file
